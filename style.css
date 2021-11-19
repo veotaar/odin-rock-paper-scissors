@@ -1,5 +1,70 @@
-/* Eye protection */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-body {
+html {
+  font-size: 16px;
+}
+
+body,html {
   background-color: black;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.header {
+  display: flex;
+  min-height: 4rem;
+  font-size: 4rem;
+  color: white;
+  background-color: rgb(17, 17, 102);
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center; 
+}
+
+.button {
+  border: .4rem solid white;
+  border-radius: 1rem;
+  margin: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem .5rem;
+  transition: all .07s ease;
+  width: 10rem;
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  text-shadow: 0 0 .5rem black;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.scores {
+  position: relative;
+  min-height: 5rem;
+  font-size: 3rem;
+  color: white;
+  border: 2px solid white;
+  text-align: center;
+}
+
+.scoretable {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
