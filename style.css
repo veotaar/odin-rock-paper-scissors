@@ -20,7 +20,7 @@ body,html {
   min-height: 4rem;
   font-size: 4rem;
   color: white;
-  background-color: rgb(17, 17, 102);
+  background-color: rgb(42, 42, 187);
   justify-content: center;
   align-items: center;
 }
@@ -30,6 +30,7 @@ body,html {
   flex: 1;
   align-items: center;
   justify-content: center; 
+  
 }
 
 .button {
@@ -44,12 +45,28 @@ body,html {
   color: white;
   background: rgba(0,0,0,0.4);
   text-shadow: 0 0 .5rem black;
+  
 }
 
 .button:hover {
   background-color: white;
   color: black;
   cursor: pointer;
+  
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.play-again-button {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  background: linear-gradient(130deg, rgba(24,74,102,1) 0%, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%);
+  color: white;
+  border-radius: 1rem;
 }
 
 .scores {
@@ -57,7 +74,6 @@ body,html {
   min-height: 5rem;
   font-size: 3rem;
   color: white;
-  border: 2px solid white;
   text-align: center;
 }
 
@@ -67,4 +83,51 @@ body,html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.game-result {
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  padding: 1rem;
+  min-height: 3rem;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.won {
+  background-color: green;
+  visibility: visible;
+}
+
+.lost {
+  background-color: red;
+  visibility: visible;
+}
+
+.history  {
+  display: flex;
+  font-size: 1.5rem;
+  color: white;
+  justify-content: center;
+}
+
+.history ul {
+  padding: 1rem;
+  list-style-type: none;
+}
+
+.player-history ul {
+  text-align: right;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.debug {
+  border: 1px solid red;
+  visibility: visible;
 }

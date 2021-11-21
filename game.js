@@ -1,7 +1,24 @@
-console.log("------------Rock Paper Scissors------------");
-
 let playerScore = 0;
 let computerScore = 0;
+let isGameOver = false;
+let roundsPlayed = 0;
+const rounds = 5;
+
+const playerHistoryList = document.querySelector(".player-history ul");
+const computerHistoryList = document.querySelector(".computer-history ul");
+
+const buttons = Array.from(document.querySelectorAll(".button"));
+buttons.forEach(button => button.addEventListener("click", playRound));
+
+const playAgainButton = document.querySelector(".play-again-button");
+playAgainButton.addEventListener("click", playAgain);
+
+const player = document.querySelector(".player");
+const computer = document.querySelector(".computer");
+
+const gameResult = document.querySelector(".game-result");
+const gameEndMessage = document.querySelector(".game-end-message");
+
 
 function computerPlay() {
   let choices = ["rock", "paper", "scissors"];
@@ -9,91 +26,88 @@ function computerPlay() {
   return randomChoice;
 }
 
-const buttons = Array.from(document.querySelectorAll(".button"));
-buttons.forEach(button => button.addEventListener("click", playRound));
 
-const player = document.querySelector(".player");
-const computer = document.querySelector(".computer");
 
 function playRound(e) {
 
+roundsPlayed++;  
+
 const playerChoice = e.target.dataset.choice;
-console.log(playerChoice);
 const computerSelection = computerPlay();
-let result;
 
-
-if (playerChoice === computerSelection) {
-  result = "It's a tie!";
-  return result;
-} 
+addItemToList(playerHistoryList, playerChoice);
+addItemToList(computerHistoryList, computerSelection);
 
 if (playerChoice === "rock") {
   if (computerSelection === "paper") {
-    result = "You lose! Paper beats rock";
     computerScore++;
     computer.innerText = computerScore.toString();
-    return result;
+   
   } else if (computerSelection === "scissors") {
-    result = "You win! Rock beats scissors";
     playerScore++;
     player.innerText = playerScore.toString();
-    return result;
+    
   }
 }
 
 if (playerChoice === "paper") {
   if (computerSelection === "scissors") {
-    result = "You lose! Scissors beats paper";
     computerScore++;
     computer.innerText = computerScore.toString();
-    return result;
   } else if (computerSelection === "rock") {
-    result = "You win! Paper beats rock";
     playerScore++;
     player.innerText = playerScore.toString();
-    return result;
   }
 }
 
 if (playerChoice === "scissors") {
   if (computerSelection === "rock") {
-    result = "You lose! Rock beats scissors";
     computerScore++;
     computer.innerText = computerScore.toString();
-    return result;
+    
   } else if (computerSelection === "paper") {
-    result = "You win! Scissors beats paper";
     playerScore++;
     player.innerText = playerScore.toString();
-    return result;
   }
 }
 
+
+if (playerScore == rounds || computerScore == rounds) {
+  isGameOver = true;
 }
 
-// for(let i = 0; i < 5; i++) {
-//   const playerSelection = prompt(`Round ${i+1}/5 rock, paper, scissors?`);
-//   const computerSelection = computerPlay();
+if(isGameOver && playerScore == rounds) {
+  gameResult.classList.add("won");
+  buttons.forEach(button => button.disabled = true);
+  gameEndMessage.innerText = "YOU WON!"
+} else if(isGameOver && computerScore == rounds) {
+  gameResult.classList.add("lost")
+  buttons.forEach(button => button.disabled = true);
+  gameEndMessage.innerText = "YOU LOST!"
+}
 
-//   console.log(`============ROUND ${i+1} / 5==================`);
+}
 
-//   console.log("You selected: " + playerSelection);
-//   console.log("Computer selected: " + computerSelection);
-  
-//   console.log(playRound(playerSelection, computerSelection));
-//   console.log("=========================================");
-// }
+function playAgain() {
+  isGameOver = false;
+  playerScore = 0;
+  computerScore = 0;
+  computer.innerText = "0";
+  player.innerText = "0";
+  buttons.forEach(button => button.disabled = false);
+  gameResult.classList.remove("won");
+  gameResult.classList.remove("lost");
+     
+  for (let i = roundsPlayed; i > 0; i--) {
+    computerHistoryList.children[i].remove();
+    playerHistoryList.children[i].remove();
+  }
 
-console.log("Game completed.");
-console.log("Results:");  
-console.log("Your score: " + playerScore);
-console.log("Computer score: " + computerScore);
+  roundsPlayed = 0;
+}
 
-if (playerScore === computerScore) {
-  console.log("DRAW");
-} else if (playerScore > computerScore) {
-  console.log("VICTORY!");
-} else {
-  console.log("DEFEAT!");
+function addItemToList(list, item) {
+  let entry = document.createElement('li');
+  entry.innerText = item;
+  list.appendChild(entry);
 }
