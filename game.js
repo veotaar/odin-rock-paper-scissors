@@ -30,61 +30,61 @@ function computerPlay() {
 
 function playRound(e) {
 
-roundsPlayed++;  
+  roundsPlayed++;  
 
-const playerChoice = e.target.dataset.choice;
-const computerSelection = computerPlay();
+  const playerChoice = e.target.dataset.choice;
+  const computerSelection = computerPlay();
 
-addItemToList(playerHistoryList, playerChoice);
-addItemToList(computerHistoryList, computerSelection);
+  addItemToList(playerHistoryList, playerChoice);
+  addItemToList(computerHistoryList, computerSelection);
 
-if (playerChoice === "rock") {
-  if (computerSelection === "paper") {
-    computerScore++;
-    computer.innerText = computerScore.toString();
-   
-  } else if (computerSelection === "scissors") {
-    playerScore++;
-    player.innerText = playerScore.toString();
+  if (playerChoice === "rock") {
+    if (computerSelection === "paper") {
+      computerScore++;
+      computer.innerText = computerScore.toString();
     
+    } else if (computerSelection === "scissors") {
+      playerScore++;
+      player.innerText = playerScore.toString();
+      
+    }
   }
-}
 
-if (playerChoice === "paper") {
-  if (computerSelection === "scissors") {
-    computerScore++;
-    computer.innerText = computerScore.toString();
-  } else if (computerSelection === "rock") {
-    playerScore++;
-    player.innerText = playerScore.toString();
+  if (playerChoice === "paper") {
+    if (computerSelection === "scissors") {
+      computerScore++;
+      computer.innerText = computerScore.toString();
+    } else if (computerSelection === "rock") {
+      playerScore++;
+      player.innerText = playerScore.toString();
+    }
   }
-}
 
-if (playerChoice === "scissors") {
-  if (computerSelection === "rock") {
-    computerScore++;
-    computer.innerText = computerScore.toString();
-    
-  } else if (computerSelection === "paper") {
-    playerScore++;
-    player.innerText = playerScore.toString();
+  if (playerChoice === "scissors") {
+    if (computerSelection === "rock") {
+      computerScore++;
+      computer.innerText = computerScore.toString();
+      
+    } else if (computerSelection === "paper") {
+      playerScore++;
+      player.innerText = playerScore.toString();
+    }
   }
-}
 
 
-if (playerScore == rounds || computerScore == rounds) {
-  isGameOver = true;
-}
+  if (playerScore == rounds || computerScore == rounds) {
+    isGameOver = true;
+  }
 
-if(isGameOver && playerScore == rounds) {
-  gameResult.classList.add("won");
-  buttons.forEach(button => button.disabled = true);
-  gameEndMessage.innerText = "YOU WON!"
-} else if(isGameOver && computerScore == rounds) {
-  gameResult.classList.add("lost")
-  buttons.forEach(button => button.disabled = true);
-  gameEndMessage.innerText = "YOU LOST!"
-}
+  if(isGameOver && playerScore == rounds) {
+    gameResult.classList.add("won");
+    buttons.forEach(button => button.disabled = true);
+    gameEndMessage.innerText = "YOU WON!"
+  } else if(isGameOver && computerScore == rounds) {
+    gameResult.classList.add("lost")
+    buttons.forEach(button => button.disabled = true);
+    gameEndMessage.innerText = "YOU LOST!"
+  }
 
 }
 
